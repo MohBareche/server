@@ -6,12 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-<<<<<<< HEAD
-    "dev": "nodemon index.js"
-=======
     "dev": "nodemon index.js",
     "build": "npm install"
->>>>>>> fd37ea01ff36038d8c27a2a134c3aee6a02abff7
   },
   "keywords": [],
   "author": "",
