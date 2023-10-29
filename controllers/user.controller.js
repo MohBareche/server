@@ -9,22 +9,28 @@ const registerUser = async (req, res) => {
         if (!username || !email || !password || !passwordVerify)
             return res.status(400).json({
                 message: "Tous les champs sont obligatoires !",
+                success: false,
             });
 
         if (password.length < 6)
             return res
                 .status(400)
-                .json({ message: "Entrez un mot de passe > 6 caracteres" });
+                .json({
+                    message: "Entrez un mot de passe > 6 caracteres",
+                    success: false,
+                });
 
         if (password !== passwordVerify)
             return res.status(400).json({
                 message: "Les mots de passe ne sont pas identiques",
+                success: false,
             });
 
         const existingUser = await User.findOne({ email });
         if (existingUser)
             return res.status(400).json({
                 message: "Le courriel existe déja. Veuillez taper un autre !",
+                success: false,
             });
 
         // hash password
@@ -48,12 +54,19 @@ const registerUser = async (req, res) => {
         // send the token in a HTTP-only cookie
         res.cookie("token", token, {
             httpOnly: true,
+            withCredentials: true,
         })
             .status(201)
-            .json({ message: "Utilisateur enregistré avec succes !" });
+            .json({
+                message: "Utilisateur enregistré avec succes !",
+                success: true,
+            });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Probleme d'entregistrement" });
+        res.status(500).json({
+            message: "Probleme d'entregistrement",
+            success: false,
+        });
     }
 };
 
@@ -118,7 +131,6 @@ const loggedIn = (req, res) => {
 
         jwt.verify(token, process.env.JWT_SECRET);
         res.json(true);
-
     } catch (error) {
         res.json(false);
     }
