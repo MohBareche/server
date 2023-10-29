@@ -48,6 +48,8 @@ const registerUser = async (req, res) => {
         // send the token in a HTTP-only cookie
         res.cookie("token", token, {
             httpOnly: true,
+            secure:true,
+            sameSite:"none"
         })
             .status(201)
             .json({ message: "Utilisateur enregistré avec succes !" });
@@ -94,6 +96,8 @@ const loginUser = async (req, res) => {
         // send the token in a HTTP-only cookie
         res.cookie("token", token, {
             httpOnly: true,
+            secure:true,
+            sameSite:"none"
         })
             .status(201)
             .json({ message: "Utilisateur connecté avec succes !" });
@@ -107,6 +111,8 @@ const logoutUser = (req, res) => {
     res.cookie("token", "", {
         httpOnly: true,
         expires: new Date(0),
+        secure:true,
+        sameSite:"none"
     });
     res.send();
 };
