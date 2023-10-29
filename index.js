@@ -7,12 +7,11 @@ require("dotenv").config();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-    cors({
-        origin: ["http://localhost:5173", "http://10.0.0.217:5173", "*"],
-        credentials: true,
-    })
-);
+app.use(cors({
+    origin:["https://moh-app.netlify.app", "http://localhost:5173"],
+    methods:["POST","GET"],
+    credentials:true
+}));
 
 app.use("/auth", require("./routes/user.route"));
 app.use("/customer", require("./routes/customer.route"));
