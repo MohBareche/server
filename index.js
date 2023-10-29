@@ -11,7 +11,7 @@ app.use(cors({
     origin:["https://moh-app.netlify.app"],
     methods:["POST","GET"],
     credentials:true
-));
+}));
 
 app.use("/auth", require("./routes/user.route"));
 app.use("/customer", require("./routes/customer.route"));
