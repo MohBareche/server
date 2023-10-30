@@ -75,14 +75,14 @@ const loginUser = async (req, res) => {
         // validation
         if (!email || !password)
             return res.status(400).json({
-                message: "Tous les champs sont obligatoires !",
+                message: "Tous les champs sont obligatoires !", success:false
             });
 
         const existingUser = await User.findOne({ email });
         if (!existingUser)
             return res.status(400).json({
                 message:
-                    "Oups ! Quelque chose s'est mal tourné. Veuillez réessayer une autre fois !",
+                    "Oups ! Quelque chose s'est mal tourné. Veuillez réessayer une autre fois !", success:false
             });
 
         // vérification password
@@ -94,7 +94,7 @@ const loginUser = async (req, res) => {
         if (!passwordCorrect)
             return res
                 .status(401)
-                .json({ message: "Courriel et/ou mot de passe non valide !" });
+                .json({ message: "Courriel et/ou mot de passe non valide !", success:false });
 
         // sign the token
         const token = jwt.sign(
@@ -109,11 +109,11 @@ const loginUser = async (req, res) => {
             secure: true,
             sameSite: "none",
         })
-            .status(201)
-            .json({ message: "Utilisateur connecté avec succes !" });
+            .status(200)
+            .json({ message: "Utilisateur connecté avec succes !", success:true });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Probleme d'entregistrement" });
+        res.status(500).json({ message: "Probleme d'entregistrement", success:false });
     }
 };
 
