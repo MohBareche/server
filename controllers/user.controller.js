@@ -13,12 +13,10 @@ const registerUser = async (req, res) => {
             });
 
         if (password.length < 6)
-            return res
-                .status(400)
-                .json({
-                    message: "Entrez un mot de passe > 6 caracteres",
-                    success: false,
-                });
+            return res.status(400).json({
+                message: "Entrez un mot de passe > 6 caracteres",
+                success: false,
+            });
 
         if (password !== passwordVerify)
             return res.status(400).json({
@@ -54,6 +52,8 @@ const registerUser = async (req, res) => {
         // send the token in a HTTP-only cookie
         res.cookie("token", token, {
             httpOnly: true,
+            secure: true,
+            sameSite: "none",
         })
             .status(201)
             .json({
@@ -106,8 +106,8 @@ const loginUser = async (req, res) => {
         // send the token in a HTTP-only cookie
         res.cookie("token", token, {
             httpOnly: true,
-            secure:true,
-            sameSite:"none"
+            secure: true,
+            sameSite: "none",
         })
             .status(201)
             .json({ message: "Utilisateur connecté avec succes !" });
@@ -121,8 +121,8 @@ const logoutUser = (req, res) => {
     res.cookie("token", "", {
         httpOnly: true,
         expires: new Date(0),
-        secure:true,
-        sameSite:"none"
+        secure: true,
+        sameSite: "none",
     });
     res.send();
 };
