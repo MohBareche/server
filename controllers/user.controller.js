@@ -57,7 +57,7 @@ const registerUser = async (req, res) => {
         })
             .status(201)
             .json({
-                message: "Utilisateur enregistré avec succes !",
+                message: "Utilisateur enregistré avec succes",
                 success: true,
             });
     } catch (error) {
@@ -110,7 +110,7 @@ const loginUser = async (req, res) => {
             sameSite: "none",
         })
             .status(200)
-            .json({ message: "Utilisateur connecté avec succes !", success:true });
+            .json({ message: "Utilisateur connecté avec succes", success:true });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Probleme d'entregistrement", success:false });
