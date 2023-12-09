@@ -13,6 +13,9 @@ app.use(cors({
     credentials:true
 }));
 
+app.get('/', (req, res) => {
+  res.status(200).json('Welcome, your server is working');
+})
 app.use("/auth", require("./routes/user.route"));
 app.use("/customer", require("./routes/customer.route"));
 
