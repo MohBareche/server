@@ -8,7 +8,7 @@ require("dotenv").config();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin:["https://moh-app.netlify.app", "http://localhost:5173"],
+    origin:["https://client-phi-swart.vercel.app", "http://localhost:5173"],
     methods:["POST","GET"],
     credentials:true
 }));
